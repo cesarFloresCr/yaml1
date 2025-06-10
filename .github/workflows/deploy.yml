@@ -12,7 +12,7 @@ jobs:
               id: step_1
               run: echo "my_var=Hello" >> $GITHUB_OUTPUT
             - name: Obtener mensaje
-              run: echo "${{ steps.step_1}}"
+              run: echo "${{ steps.step_1.outputs.my_var}}"
             
     second_job:
         if: ${{ github.ref == 'refs/heads/main'}}
