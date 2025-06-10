@@ -9,7 +9,7 @@ jobs:
             NAME: CodigoFacilito
         outputs: 
           
-          salida:${{ steps.step_1.outputs.my_var}}
+          salida: ${{steps.step_1.outputs.my_var}}
 
         steps:
             - name: Working dir
