@@ -5,27 +5,16 @@ on: push
 jobs: 
     first_job:
         runs-on: ubuntu-latest
-        env:
-            NAME: CodigoFacilito
         outputs: 
-          
-          salida: ${{steps.step_1.outputs.my_var}}
+          salida: ${{ steps.step_1.outputs.my_var }}
 
         steps:
-            - name: Working dir
-              id: step_1
-              run: echo "my_var=Hello" >> $GITHUB_OUTPUT
-            - name: Obtener mensaje
-              run: echo "${{ steps.step_1.outputs.my_var}}"
-            
-    second_job:
-        if: ${{ github.ref == 'refs/heads/main'}}
-        needs: first_job
-        runs-on: ubuntu-latest
+            - name: Generar archivo
+              run: echo "Archivo prueba, hola" >> test.log
+            - name: Subir artefacto
+              uses: actions/upload-artifact@v4
+              with: 
+                name: archivo-test
+                path: test.log
 
-        env: 
-          SALIDA: ${{ needs.first_job.outputs.salida}}
-
-        steps:
-            - name: Hola mundo
-              run: echo "$SALIDA"
+    
